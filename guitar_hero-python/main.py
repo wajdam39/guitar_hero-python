@@ -31,7 +31,7 @@ class gra:
         self.dzwieki = MenedzerDzwiekowWinsound()
         self.screen = None
         self._aktualny_czas = 2.00  # Startowy czas pierwszej nuty
-        self.tempo = tempo          # Ustawienie tempa (BPM)
+        self.tempo = tempo          # Ustawienie tempo (BPM)
         self.punkty = 0             # Licznik punktów gracza
         self.czcionka = None        # Inicjalizowana po uruchomieniu pygame
 
@@ -46,7 +46,7 @@ class gra:
             "cala": krok_cwiercnuty * 4.0,
             "cwiercnuta_z_kropka": krok_cwiercnuty * 1.5,
             "osemka_z_kropka": krok_cwiercnuty * 0.75,
-            "triole_cwiercnutowe": krok_cwiercnuty / 3.0,
+            "triole_cwiercnutowe": (krok_cwiercnuty * 2.0) / 3.0,
         }
 
     def dodaj(self, kolumna, czestotliwosc, wartosc="osemka"):
@@ -224,8 +224,8 @@ class gra:
                 kolor_nuty = ZOLTY if n.trafiona else ZIELONY
                 pygame.draw.rect(self.screen, kolor_nuty, (x_pozycja, y_pozycja_prostokata, 30, max(int(wysokosc_nuty), 10)))
 
-        # Wyświetlanie punktów na ekranie
-        tekst_punktow = self.czcionka.render(f"Punkty: {self.punkty}", True, BIALY)
+        # Wyświetlanie punktów oraz aktualnego tempa na ekranie
+        tekst_punktow = self.czcionka.render(f"Punkty: {self.punkty} | BPM: {self.tempo}", True, BIALY)
         self.screen.blit(tekst_punktow, (10, 10))
 
         pygame.display.flip()
@@ -240,19 +240,25 @@ class gra:
                 
                 if roznica <= okno_trafienia:
                     n.trafiona = True
-                    self.punkty += 100  # Dodajemy 100 punktów za trafienie
-                    print("Trafienie! (Hit) +100 pkt")
+                    
+                    # Liczenie punktów uwzględniające tempo (im wyższe BPM, tym większa premia)
+                    mnozniki_tempo = self.tempo / 100.0
+                    przyrost_punktow = int(100 * mnozniki_tempo)
+                    
+                    self.punkty += przyrost_punktow
+                    print(f"Trafienie! (Hit) +{przyrost_punktow} pkt")
                     self.dzwieki.dzwiek(n.czestotliwosc, n.czas_trwania)
                     return
 
-        print("Pudło! -50 pkt")
-        self.punkty = max(0, self.punkty - 50)  # Opcjonalnie: kara za pudło (nie schodzimy poniżej 0)
+        kara = int(50 * (self.tempo / 100.0))
+        print(f"Pudło! -{kara} pkt")
+        self.punkty = max(0, self.punkty - kara)  # Nie schodzimy poniżej 0 punktów
         self.dzwieki.odtworz_pudlo()
 
     def uruchom(self):
         pygame.init()
         self.screen = pygame.display.set_mode((400, 600))
-        self.czcionka = pygame.font.SysFont("Arial", 24)  # Inicjalizacja czcionki
+        self.czcionka = pygame.font.SysFont("Arial", 22)  # Inicjalizacja czcionki
         clock = pygame.time.Clock()
         
         while True:
@@ -284,7 +290,8 @@ class nuta:
         self.dlugosc_trwania = dlugosc_trwania  
 
 if __name__ == "__main__":
-    gra1 = gra([], tempo=100)
+    # Możesz zmienić tempo tutaj, np. 180, a punkty automatycznie się skalują!
+    gra1 = gra([], tempo=180)
     gra1.wczytaj_piosenke()
 
     try:
