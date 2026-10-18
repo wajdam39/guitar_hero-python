@@ -167,7 +167,47 @@ def wczytaj_mario(self):
         self.dodaj(3, C5, "osemka")
         self.pauza("osemka")
         self.dodaj(2, A4, "osemka")
-        self.dodaj(1, G4, "polnuta")        
+        self.dodaj(1, G4, "polnuta")
+
+        self.dodaj(3, E5, "osemka")
+        self.dodaj(3, E5, "osemka")
+        self.pauza("osemka")
+        self.dodaj(3, E5, "osemka")
+        self.pauza("osemka")
+        self.dodaj(2, C5, "osemka")
+        self.dodaj(3, E5, "cwiercnuta")
+
+        self.dodaj(4, G5, "cwiercnuta")
+        self.pauza("cwiercnuta")
+        self.dodaj(3, G4, "cwiercnuta")
+        self.pauza("cwiercnuta")
+
+        for _ in range(2):
+            self.dodaj(1, C5, "cwiercnuta")
+            self.pauza("osemka")
+            self.dodaj(3, G4, "cwiercnuta")
+            self.pauza("osemka")
+            self.dodaj(2, E4, "cwiercnuta")
+            
+            self.pauza("osemka")
+            self.dodaj(3, A4, "cwiercnuta")
+            self.dodaj(4, B4, "cwiercnuta")
+            self.dodaj(3, Bb4, "osemka")
+            self.dodaj(2, A4, "cwiercnuta")
+
+            self.dodaj(1, G4, "triole_cwiercnutowe")
+            self.dodaj(2, D5, "triole_cwiercnutowe")
+            self.dodaj(3, G5, "triole_cwiercnutowe")
+            self.dodaj(4, A5, "cwiercnuta")
+            self.dodaj(3, F5, "osemka")
+            self.dodaj(4, G5, "osemka")
+
+            self.pauza("osemka")
+            self.dodaj(4, E5, "cwiercnuta")
+            self.dodaj(2, C5, "osemka")
+            self.dodaj(3, D5, "osemka")
+            self.dodaj(1, B4, "cwiercnuta")
+            self.pauza("osemka")
 
 def wczytaj_Thank_You_Not_So_Bad(self):
         # Resetujemy licznik czasu na start (dajemy 2 sekundy buforu na ekranie)
@@ -210,13 +250,14 @@ def wczytaj_Thank_You_Not_So_Bad(self):
         self.dodaj(1, Eb5, "polnuta")
         self.pauza("cwiercnuta")
         self.dodaj(1, C5, "osemka")
-
+        #takt 8
         self.dodaj(3, Ab5, "cwiercnuta")
         self.dodaj(4, Bb5, "cwiercnuta")
         self.dodaj(2, F5, "cwiercnuta")
         self.dodaj(1, Eb5, "osemka")
         self.dodaj(3, F5, "cwiercnuta")
 
+        self.pauza("osemka")
         self.dodaj(1, Db5, "osemka")
         self.dodaj(2, Gb5, "osemka")
         self.dodaj(2, Gb5, "cwiercnuta")

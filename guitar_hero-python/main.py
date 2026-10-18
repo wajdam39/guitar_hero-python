@@ -97,7 +97,7 @@ class gra:
                 x_pozycja = (n.kolumna - 1) * szerokosc_kolumny + (szerokosc_kolumny // 2) - 15
                 
                 kolor_nuty = ZOLTY if n.trafiona else ZIELONY
-                pygame.draw.rect(self.screen, kolor_nuty, (x_pozycja, y_pozycja_prostokata, 30, max(int(wysokosc_nuty), 10)))
+                pygame.draw.rect(self.screen, kolor_nuty, (x_pozycja, y_pozycja_prostokata, 30, max(int(wysokosc_nuty)*0.9, 10)))
 
         # Wyświetlanie punktów oraz aktualnego tempa na ekranie
         tekst_punktow = self.czcionka.render(f"Punkty: {self.punkty} | BPM: {self.tempo}", True, BIALY)
@@ -168,10 +168,14 @@ if __name__ == "__main__":
     # Możesz zmienić tempo tutaj, np. 180
     gra1 = gra([], tempo=150)
     utwory.wczytaj_Thank_You_Not_So_Bad(gra1)  # tempo: 150 BPM
-    gra2 = gra([], tempo=180)
-    utwory.wczytaj_mario(gra2)  # tempo: 180 BPM
-
     try:
         gra1.uruchom()
+    except KeyboardInterrupt:
+        print("\nGra została przerwana. Do zobaczenia!")
+    
+    gra2 = gra([], tempo=180)
+    utwory.wczytaj_mario(gra2)  # tempo: 180 BPM
+    try:
+        gra2.uruchom()
     except KeyboardInterrupt:
         print("\nGra została przerwana. Do zobaczenia!")
