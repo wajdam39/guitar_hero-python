@@ -165,7 +165,7 @@ class nuta:
         self.dlugosc_trwania = dlugosc_trwania  
 
 if __name__ == "__main__":
-    # Możesz zmienić tempo tutaj, np. 180
+    
     gra1 = gra([], tempo=150)
     utwory.wczytaj_Thank_You_Not_So_Bad(gra1)  # tempo: 150 BPM
     try:
